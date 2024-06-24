@@ -1,0 +1,82 @@
+<div class="container mt-4">
+    <div class="mt-5  pt-5">
+        <p-button label="Back" (click)="redirectToHomeComponent()" [raised]="true" />
+    </div>
+    <p-card header="User Details" >
+       
+        <div class="row">
+            <!-- Left Column -->
+            
+              <div class="col-md-3">
+                <label for="userName">Name</label>
+                <input type="text" class="form-control" id="userName" [value]="userDetails.name" disabled>
+              </div>
+              <div class="col-md-3">              
+                <label for="userId">User Name</label>
+                <input type="text" class="form-control" id="userId" [value]="userDetails.username" disabled>
+              </div>  
+              <div class="col-md-3">       
+                <label for="userEmail">Email address</label>
+                <input type="email" class="form-control" id="userEmail" [value]="userDetails.email" disabled>
+              </div>    
+              <div class="col-md-3">       
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" [value]="userDetails.phone" disabled>
+              </div>   
+              <div class="col-md-3">       
+                <label for="website">Website</label>
+                <input type="text" class="form-control" id="website" [value]="userDetails.website" disabled>
+              </div>  
+              <div class="col-md-3">       
+                <label for="company">Company</label>
+                <input type="text" class="form-control" id="company" [value]="userDetails.company.name" disabled>
+              </div>    
+           
+              <div class="col-md-3">
+                <label for="userAddress">Address</label>
+                <textarea class="form-control" id="userAddress" rows="3" [value]="userDetails.address.street + ', ' + userDetails.address.city + ', ' + userDetails.address.zipcode" disabled></textarea>
+              </div>
+            
+          </div>
+    </p-card>
+
+    <div class="mt-5  pt-5"></div>
+    <p-card header="Post Details">
+        <div class="row">
+            <p-table [value]="comment"  styleClass="p-datatable-striped"  [tableStyle]="{ 'min-width': '50rem' }" [rowsPerPageOptions]="[5, 10, 20]"
+            [scrollable]="true" 
+            scrollHeight="400px" >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Comment</th>
+                        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-comment>
+                    <tr>
+                        <td>{{ comment.name }}</td>
+                        <td>{{ comment.email }}</td>
+                        <td>{{ comment.body }}</td>
+                     
+                    </tr>
+                </ng-template>
+            </p-table>
+            <!-- <div class="col-md-3">
+                <label for="postname">Post Name</label>
+                <input type="text" class="form-control" id="postname" [value]="comment.name" disabled>
+              </div>
+              <div class="col-md-3">
+                <label for="commentbody">Comment</label>
+                <textarea class="form-control" id="commentbody" rows="3" [value]="comment.body" disabled></textarea>
+              </div> -->
+
+        </div>
+    </p-card>
+
+    <div class="mt-5  pt-5"></div>
+   
+   
+  </div>
+  
