@@ -1,64 +1,145 @@
 <p>home works!</p>
 <div class="container">
-    
-<p-toast></p-toast>
-<div class="mt-5  pt-5"></div>
-<!-- <p-table [value]="userpost" selectionMode="single" [(selection)]="selectedProduct" dataKey="id"
-    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [tableStyle]="{'min-width': '50rem'}">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Title</th>
-            <th>Content</th>
-            <th>User</th>
-           
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-post>
-        <tr [pSelectableRow]="post">
-            <td>{{post.title}}</td>
-            <td>{{post.body}}</td>
-            <td>{{post.username}}</td>
-           
-        </tr>
-    </ng-template>
-</p-table> -->
 
-<div class="card">
-    <p-table 
-        [value]="groupedData"
-        sortField="user.name" 
-        sortMode="single" 
-        [scrollable]="true" 
-        scrollHeight="400px" 
-        rowGroupMode="subheader" 
-        groupRowsBy="user.name" 
-        [tableStyle]="{'min-width': '60rem'}">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>User Name</th>
-                <th>Post </th>
-                <th>Comment</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="groupheader" let-row>
-            <tr pRowGroupHeader>
-                <td colspan="3">
-                    <p-button icon="pi pi-user" severity="info" class="smaller-button" [raised]="true" [outlined]="true"  (click)="navigateToNextPage(row.user.id)"></p-button>
-                    <span class="font-bold ml-2">{{row.user.name}}</span>
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-            <tr>
-                <td>{{row.user.name}}</td>
-                <td>{{row.post.title}}</td>
-                <td>{{row.post.body}}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
+    <p-toast></p-toast>
+    <div class="mt-5  pt-5"></div>
+
+
+    <div class="card">
+        <p-table [value]="groupedData" sortField="user.name" sortMode="single" [scrollable]="true" scrollHeight="800px"
+            rowGroupMode="subheader" groupRowsBy="user.name" [tableStyle]="{'min-width': '60rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name" style="width:20%">
+                        User Name : <p-sortIcon field="name" />
+                        <input id="username" [(ngModel)]="search "(input)="onInputChangeReactiveFOrm()" name="User Name"/>
+                    </th>
+                    <!-- <th>User Name : </th> -->
+                    
+                    <th>Post </th>
+                    <th>Comment</th>
+                    
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="groupheader" let-row>
+                <tr pRowGroupHeader>
+                    <td colspan="3">
+                        <p-button icon="pi pi-user" severity="info" class="smaller-button" [raised]="true"
+                            [outlined]="true" (click)="navigateToNextPage(row.user.id)"></p-button>
+                        <span class="font-bold ml-2">{{row.user.name}}</span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                    <td>{{row.user.name}}</td>
+                    <td>{{row.post.title}}</td>
+                    <td>{{row.post.body}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <!-- <div class="container">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <label for="username">Username:</label>
+            <input id="username" formControlName="username" (input)="onInputChangeReactiveFOrm()"/>
+
+            <div
+                *ngIf="userForm.get('username')?.invalid&& (userForm.controls['username'].dirty || userForm.controls['username'].touched)">
+                <div *ngIf="userForm.controls['username'].errors?.['required']">
+                    Username is required.
+                </div>
+                <div *ngIf="userForm.controls['username'].errors?.['minlength']">
+                    Username must be at least 5 characters long.
+                </div>
+                <div *ngIf="userForm.controls['username'].errors?.['maxlength']">
+                    Username cannot be more than 20 characters long.
+                </div>
+                <div *ngIf="userForm.controls['username'].errors?.['pattern']">
+                    Username must be alphanumeric.
+                </div>
+
+            </div>
+
+
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email" />
+            <div
+                *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)">
+                <div *ngIf="userForm.controls['email'].errors?.['required']">
+                    Email is required.
+                </div>
+                <div *ngIf="userForm.controls['email'].errors?.['email']">
+                    Please enter a valid email address.
+                </div>
+            </div>
+
+            <label for="password">Password:</label>
+            <input id="password" type="password" formControlName="password" />
+            <div
+                *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)">
+                <div *ngIf="userForm.controls['password'].errors?.['required']">
+                    Password is required.
+                </div>
+                <div *ngIf="userForm.controls['password'].errors?.['minlength']">
+                    Password must be at least 8 characters long.
+                </div>
+            </div>
+
+            <div>
+                <label for="country">Country:</label>
+                <select id="country" formControlName="country" [(ngModel)]="selectedCountryCode" (change)="onCountryChange($event)" >
+                    <option value="">Select a country</option>
+                    <option *ngFor="let country of countries" [value]="country.code" >{{ country.name }}</option>
+                </select>
+                <div
+                    *ngIf="userForm.controls['country'].invalid && (userForm.controls['country']?.dirty || userForm.controls['country']?.touched)">
+                    <small *ngIf="userForm.controls['country']?.errors?.['required']">Country is required.</small>
+                </div>
+            </div>
+            <button type="submit" [disabled]="userForm.invalid">Submit</button>
+
+
+
+        </form>
+    </div>
 
   
+    <form #myForm="ngForm" (ngSubmit)="onSubmit1(myForm)">
+        <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name" [(ngModel)]="name" required minlength="3" #nameInput="ngModel" (input)="onInputChange()"
+                placeholder="Enter your name">
+            <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+                <small *ngIf="nameInput.errors?.['required']">Name is required.</small>
+                <small *ngIf="nameInput.errors?.['minlength']">
+                    Name must be at least 3 characters long.
+                </small>
+            </div>
+        </div>
+        <button type="submit" [disabled]="myForm.invalid">Submit</button>
+    </form>
+    <div>
+        <p>Your name is: {{ name }}</p>
+    </div> -->
 
-    
-  </div>
+
+
+</div>
+
+<!-- <div *ngIf="lessons"><input id="" [(ngModel)]=""
+    <div class="lesson" *ngFor="let lesson of lessons">
+        <div class="lesson-detail">
+            {{lesson | json}}
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="lessons">
+    <div class="lesson" *ngFor="let lesson of lessons">
+        <div class="lesson-detail">
+            {{lesson | json}}
+        </div>
+    </div>
+</ng-container> -->

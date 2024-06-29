@@ -8,6 +8,7 @@ import { UserdetailsService } from '../userdetails/userdetails.service';
 import { Address } from '../model/Address';
 import { Company } from '../model/company';
 import { User } from '../model/User';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 interface GroupedData {
   user: any;
@@ -21,44 +22,51 @@ interface GroupedData {
 
 export class HomeComponent implements OnInit{
 
+
   groupedData: GroupedData[] = [];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   posts: Post[] = [];
   userpost:UserPost[]=[];
   selectedProduct!: Post;
-  constructor(private homeService: HomeService, private messageService: MessageService,private router: Router,private userdetailsService:UserdetailsService ) {}
 
-    ngOnInit() {
-      // this.userdetailsService.getlistOFUsers().subscribe((users:any)=>{
-      //   users.forEach((user:any) => {
-      //     this.homeService.getPosts().subscribe(posts => {
-         
-  
-      //       const filteredPosts = posts.filter((post: any) => post.userId === user.id);
-           
-  
-      //       const userPost = new UserPost(user);
-      //       userPost.posts = filteredPosts;
-      //       userPost.posts = filteredPosts;
-      //       this.userpost.push(userPost);
-            
-      //     });
-      //   });
-      //   console.log('User Post:', this.userpost); 
-      // });
+  //forms
+  userForm: FormGroup;
+  name!: any;
+  selectedCountryCode: string = '';
+  selectedCountryName: string = '';
+  regexPattern: RegExp = /^[a-zA-Z\s]*$/; 
+
+  search!:any;
+
+  countries = [
+    { name: 'United States', code: 'US' },
+    { name: 'Canada', code: 'CA' },
+    { name: 'United Kingdom', code: 'UK' },
+    // Add more countries as needed
+  ];
+  constructor(private homeService: HomeService, private messageService: MessageService,private router: Router,private userdetailsService:UserdetailsService,private fb: FormBuilder ) 
+  {
+    this.userForm = this.fb.group({
+      username: ['', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20),
+        Validators.pattern('^[a-zA-Z0-9]+$')
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]],
+      country:['',[
+        Validators.required
+      ]]
+    });
+  }
+  lessons = ['Lesson 1', 'Lessons 2'];
+    ngOnInit() {    
       
 
       this.loadData();
@@ -96,6 +104,52 @@ export class HomeComponent implements OnInit{
         const user = users.find(user => user.id === post.userId);
         return { user, post };
       });
+    }
+
+    // groupDataByUserName(users: any[]): GroupedData[] {
+      
+    //     const user = users.find(user => user.id === post.userId);
+    //     return { user, post };
+      
+    // }
+
+    ///save data
+    onSubmit() {
+      if (this.userForm.valid) {
+        console.log('Form submitted!', this.userForm.value);
+      } else {
+        console.error('Form is invalid');
+      }
+    }
+
+    onSubmit1(form: NgForm) {
+      if (form.valid) {
+        console.log('Form Submitted!', this.name);
+      }
+    }
+
+    onCountryChange(event: Event) {
+      this.selectedCountryName = this.getCountryName(this.selectedCountryCode);
+      console.log('Selected country code:', this.selectedCountryCode);
+      console.log('Selected country name:', this.selectedCountryName);
+    }
+
+    getCountryName(code: string): string {
+      const country = this.countries.find(c => c.code === code);
+      return country ? country.name : 'Unknown';
+    }
+    onInputChange(){
+      console.log(this.name);
+      if (!this.regexPattern.test(this.name)) {
+        this.name = this.name.replace(/[^a-zA-Z0-9\s]/g, '');
+        
+        console.log('Invalid input!');
+      }
+    }
+    onInputChangeReactiveFOrm(){
+      const n = this.search;
+      this.groupedData=this.groupedData.filter(f=>f.user.name==this.search);
+      console.log(this.groupedData);
     }
 
 }

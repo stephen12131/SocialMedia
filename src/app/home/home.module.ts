@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserdetailsService } from '../userdetails/userdetails.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +19,9 @@ import { UserdetailsService } from '../userdetails/userdetails.service';
     ButtonModule,
     TableModule,
     HttpClientModule,
-    ToastModule
+    ToastModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [HomeService,MessageService,UserdetailsService],
 })
