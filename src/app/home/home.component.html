@@ -10,10 +10,14 @@
             rowGroupMode="subheader" groupRowsBy="user.name" [tableStyle]="{'min-width': '60rem'}">
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="name" style="width:20%">
-                        User Name : <p-sortIcon field="name" />
+                    <div class="container">
                         <input id="username" [(ngModel)]="search "(input)="onInputChangeReactiveFOrm()" name="User Name"/>
-                    </th>
+                        <th pSortableColumn="name" style="width:20%">
+                            User Name : <p-sortIcon field="name" />                            
+                        </th>
+                    </div>
+                    
+                    
                     <!-- <th>User Name : </th> -->
                     
                     <th>Post </th>

@@ -9,10 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './home/home.module';
 
 import { UserdetailsModule } from './userdetails/userdetails.module';
+import { ExamplefunctionsComponent } from './examplefunctions/examplefunctions.component';
+import { ExampleFunctionModule } from './examplefunctions/examplefunctions.module';
 
 @NgModule({
   declarations: [
     AppComponent
+    
     
     
   ],
@@ -21,7 +24,8 @@ import { UserdetailsModule } from './userdetails/userdetails.module';
     AppRoutingModule,
     BrowserAnimationsModule,   
     HomeModule,
-    UserdetailsModule
+    UserdetailsModule,
+    ExampleFunctionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,4 +13,12 @@ export class HomeService {
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl);
   }
+
+  getPostsbyUsingPromise(): Promise<any[]> {
+    return this.http.get<any[]>(this.apiUrl).toPromise().then(posts => posts ?? []);
+  }
+
+  getlistOFUsersbyUsingPromise(): Promise<any[]> {
+    return this.http.get<any[]>('https://jsonplaceholder.typicode.com/users').toPromise().then(users => users ?? []);
+  }
 }
