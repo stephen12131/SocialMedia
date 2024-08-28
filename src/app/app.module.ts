@@ -11,13 +11,16 @@ import { HomeModule } from './home/home.module';
 import { UserdetailsModule } from './userdetails/userdetails.module';
 import { ExamplefunctionsComponent } from './examplefunctions/examplefunctions.component';
 import { ExampleFunctionModule } from './examplefunctions/examplefunctions.module';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './parent/child/child.component';
+import { ParentModule } from './parent/parent.module';
+import { FormscontrolexampleComponent } from './formscontrolexample/formscontrolexample.component';
+import { FormscontrolexampleModule } from './formscontrolexample/formscontrolexample.module';
 
 @NgModule({
   declarations: [
-    AppComponent
-    
-    
-    
+    AppComponent,
+      
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import { ExampleFunctionModule } from './examplefunctions/examplefunctions.modul
     BrowserAnimationsModule,   
     HomeModule,
     UserdetailsModule,
-    ExampleFunctionModule
+    ExampleFunctionModule,
+    ParentModule,
+    FormscontrolexampleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

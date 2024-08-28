@@ -1,0 +1,16 @@
+<div class="container mt-5 pt-5">
+    <h2>Parent Component</h2>
+    <p>Selected User: {{ selectedUser?.name }}</p>
+    
+    <app-child [user]="user" (userClicked)="onUserClicked($event)"></app-child>
+  </div>
+  
+
+
+  <div class="container">
+    <h2>Parent Component Using ViewChild</h2>
+    <p>{{ userInfo }}</p>
+    
+    <app-child [user]="user"></app-child>
+    <button (click)="showUserInfo()">Get User Info</button>
+  </div>

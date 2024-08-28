@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
       ]]
     });
   }
-  lessons = ['Lesson 1', 'Lessons 2'];
+  
   ngOnInit() {
 
 
@@ -114,8 +114,20 @@ export class HomeComponent implements OnInit {
 
 
 
-  ///save data
-  onSubmit() {
+ 
+
+  onCountryChange(event: Event) {
+    this.selectedCountryName = this.getCountryName(this.selectedCountryCode);
+    
+  }
+
+  getCountryName(code: string): string {
+    const country = this.countries.find(c => c.code === code);
+    return country ? country.name : 'Unknown';
+  }
+
+   ///save data
+   onSubmit() {
     if (this.userForm.valid) {
       console.log('Form submitted!', this.userForm.value);
     } else {
@@ -128,17 +140,6 @@ export class HomeComponent implements OnInit {
       console.log('Form Submitted!', this.name);
     }
   }
-
-  onCountryChange(event: Event) {
-    this.selectedCountryName = this.getCountryName(this.selectedCountryCode);
-    console.log('Selected country code:', this.selectedCountryCode);
-    console.log('Selected country name:', this.selectedCountryName);
-  }
-
-  getCountryName(code: string): string {
-    const country = this.countries.find(c => c.code === code);
-    return country ? country.name : 'Unknown';
-  }
   onInputChange() {
     console.log(this.name);
     if (!this.regexPattern.test(this.name)) {
@@ -146,6 +147,9 @@ export class HomeComponent implements OnInit {
 
       console.log('Invalid input!');
     }
+  }
+  get f() {
+    return this.userForm.controls;
   }
   onInputChangeReactiveFOrm() {
     const n = this.search;
@@ -167,9 +171,25 @@ export class HomeComponent implements OnInit {
       this.loadData();
     }
 
-
-
   }
+
+   // Getters for easy access in the template
+   get username() {
+    return this.userForm.get('username');
+  }
+
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get country() {
+    return this.userForm.get('country');
+  }
+
 
   loadDataByUsingmergeMap() {
     // Get the list of users first
@@ -186,7 +206,7 @@ export class HomeComponent implements OnInit {
             return of([]); // Return an empty array in case of error
           }),
           map(posts => this.groupDataByUser(users, posts)),
-          tap(groupedData => console.log('Grouped Data:', groupedData))
+         // tap(groupedData => console.log('Grouped Data:', groupedData))
         );
       })
     ).subscribe(

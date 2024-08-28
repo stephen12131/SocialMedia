@@ -1,0 +1,32 @@
+
+
+<div class="container mt-5 pt-5">
+    <form [formGroup]="mycontrolform" (ngSubmit)="formSUbmit()">
+     <div class="row">
+         <div class="col-3">
+            <label for="username">Username : </label>
+            <input type="text" id="username" formControlName="username" class="ms-2"/>
+            <div *ngIf="username?.touched && username?.invalid">
+                <div *ngIf="username?.errors?.['required']"> User Name is Mandaotry</div>
+                <div *ngIf="username?.errors?.['minlength']"> User Name Should be more than 1.</div>
+            </div>
+         </div> 
+         <div class="col-3">
+         <label for="email">Email : </label>
+            <input type="email" id="email" formControlName="email" class="ms-2"/>
+            <div *ngIf="email?.touched && email?.invalid">
+                <div *ngIf="email?.errors?.['required']">Eamil is Mandatory</div>
+               
+            </div>
+        
+         </div>
+     </div>
+     <button type="submit" [disabled]="mycontrolform.invalid">Submit</button>
+    </form>
+
+</div>
+
+
+
+
+
