@@ -16,10 +16,13 @@ import { ChildComponent } from './parent/child/child.component';
 import { ParentModule } from './parent/parent.module';
 import { FormscontrolexampleComponent } from './formscontrolexample/formscontrolexample.component';
 import { FormscontrolexampleModule } from './formscontrolexample/formscontrolexample.module';
+import { MessagingComponent } from './messaging/messaging.component';
+import { MessagingModule } from './messaging/messaging.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    
       
   ],
   imports: [
@@ -30,7 +33,8 @@ import { FormscontrolexampleModule } from './formscontrolexample/formscontrolexa
     UserdetailsModule,
     ExampleFunctionModule,
     ParentModule,
-    FormscontrolexampleModule
+    FormscontrolexampleModule,
+    MessagingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
