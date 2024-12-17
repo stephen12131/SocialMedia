@@ -9,8 +9,11 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { UserdetailsService } from '../userdetails/userdetails.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  { path: '', component: HomeComponent }
+];
 
 @NgModule({
   declarations: [HomeComponent],
@@ -21,8 +24,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ToastModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forChild(routes)
   ],
   providers: [HomeService,MessageService,UserdetailsService],
+  exports: [RouterModule]
 })
 export class HomeModule { }

@@ -1,0 +1,53 @@
+<div class="container mt-5 pt-5">
+  <h3>Original Text:</h3>
+  <p>{{ text }}</p>
+
+  <h3>Capitalized Text:</h3>
+  <p>{{ text | capitalize }}</p>
+</div>
+<div class="container mt-5 pt-5">
+  <h2>Impure Pipe Example</h2>
+  <ul>
+    <li *ngFor="let item of items | impureFilter">{{ item }}</li>
+  </ul>
+  <button (click)="toggleItemActive()">Toggle Active</button>
+</div>
+
+<div class="container mt-5 pt-5">
+  <h2>Defaulst Pipes Example</h2>
+  <h3>DatePipe</h3>
+  <p>Default: {{ today }}</p>
+  <p>Short: {{ today | date: 'short' }}</p>
+  <p>FullDate: {{ today | date: 'fullDate' }}</p>
+
+  <h3>CurrencyPipe</h3>
+  <p>USD: {{ amount | currency: 'USD' }}</p>
+  <p>INR: {{ amount | currency: 'INR' }}</p>
+
+  <h3>DecimalPipe</h3>
+  <p>Default: {{ amount | number }}</p>
+  <p>With 2 decimals: {{ amount | number: '1.2-2' }}</p>
+
+  <h3>PercentPipe</h3>
+  <p>{{ 0.1234 | percent }}</p>
+
+  <h3>UpperCasePipe</h3>
+  <p>{{ 'angular pipes' | uppercase }}</p>
+
+  <h3>LowerCasePipe</h3>
+  <p>{{ 'ANGULAR PIPES' | lowercase }}</p>
+
+  <h3>TitleCasePipe</h3>
+  <p>{{ 'angular pipes' | titlecase }}</p>
+
+  <h3>JsonPipe</h3>
+  <p>{{ jsonData | json }}</p>
+
+  <h3>SlicePipe</h3>
+  <p>First 2 Items: {{ items1 | slice:0:2 }}</p>
+  <p>Last 2 Items: {{ items1 | slice:-2 }}</p>
+
+  <h3>AsyncPipe</h3>
+  <p>{{ asyncValue | async }}</p>
+
+</div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-child',
@@ -9,6 +10,7 @@ export class ChildComponent {
 
   @Input() user:any;
   @Output() userClicked = new EventEmitter();
+ 
 
   selectUser() {
     this.userClicked.emit(this.user);

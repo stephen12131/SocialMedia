@@ -18,12 +18,15 @@ import { FormscontrolexampleComponent } from './formscontrolexample/formscontrol
 import { FormscontrolexampleModule } from './formscontrolexample/formscontrolexample.module';
 import { MessagingComponent } from './messaging/messaging.component';
 import { MessagingModule } from './messaging/messaging.module';
+import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
+import { TemplatedrivenFormModule } from './template-driven-form/templatedriven-form.module';
+import { PipesComponent } from './pipes/pipes.component';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
-      
+    AppComponent  
+   
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,9 @@ import { MessagingModule } from './messaging/messaging.module';
     ExampleFunctionModule,
     ParentModule,
     FormscontrolexampleModule,
-    MessagingModule
+    MessagingModule,
+    TemplatedrivenFormModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

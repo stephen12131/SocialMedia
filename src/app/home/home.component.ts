@@ -30,8 +30,7 @@ export class HomeComponent implements OnInit {
   userpost: UserPost[] = [];
   selectedProduct!: Post;
 
-  //forms
-  userForm: FormGroup;
+
   name!: any;
   selectedCountryCode: string = '';
   selectedCountryName: string = '';
@@ -45,26 +44,8 @@ export class HomeComponent implements OnInit {
     { name: 'United Kingdom', code: 'UK' },
     // Add more countries as needed
   ];
-  constructor(private homeService: HomeService, private messageService: MessageService, private router: Router, private userdetailsService: UserdetailsService, private fb: FormBuilder) {
-    this.userForm = this.fb.group({
-      username: ['', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(20),
-        Validators.pattern('^[a-zA-Z0-9]+$')
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8)
-      ]],
-      country: ['', [
-        Validators.required
-      ]]
-    });
+  constructor(private homeService: HomeService, private messageService: MessageService, private router: Router, private userdetailsService: UserdetailsService) {
+    
   }
   
   ngOnInit() {
@@ -108,6 +89,7 @@ export class HomeComponent implements OnInit {
     return posts.map(post => {
       const user = users.find(user => user.id === post.userId);
      
+     
       return { user, post };
     });
   }
@@ -126,31 +108,10 @@ export class HomeComponent implements OnInit {
     return country ? country.name : 'Unknown';
   }
 
-   ///save data
-   onSubmit() {
-    if (this.userForm.valid) {
-      console.log('Form submitted!', this.userForm.value);
-    } else {
-      console.error('Form is invalid');
-    }
-  }
+   
 
-  onSubmit1(form: NgForm) {
-    if (form.valid) {
-      console.log('Form Submitted!', this.name);
-    }
-  }
-  onInputChange() {
-    console.log(this.name);
-    if (!this.regexPattern.test(this.name)) {
-      this.name = this.name.replace(/[^a-zA-Z0-9\s]/g, '');
-
-      console.log('Invalid input!');
-    }
-  }
-  get f() {
-    return this.userForm.controls;
-  }
+ 
+  
   onInputChangeReactiveFOrm() {
     const n = this.search;
     if (n != '' && n != null) {
@@ -173,22 +134,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-   // Getters for easy access in the template
-   get username() {
-    return this.userForm.get('username');
-  }
-
-  get email() {
-    return this.userForm.get('email');
-  }
-
-  get password() {
-    return this.userForm.get('password');
-  }
-
-  get country() {
-    return this.userForm.get('country');
-  }
+  
 
 
   loadDataByUsingmergeMap() {

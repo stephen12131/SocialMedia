@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Post } from '../model/Post';
 
 @Injectable({
@@ -8,9 +8,11 @@ import { Post } from '../model/Post';
 })
 export class HomeService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private SUb =new BehaviorSubject<string>("");
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
+    this.SUb.next("");
     return this.http.get<Post[]>(this.apiUrl);
   }
 
